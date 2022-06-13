@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .section {
+        @apply rounded bg-slate-200 shadow-md grid dark:bg-neutral-800 dark:shadow-2xl;
+    }
+    .article {
+        @apply p-4 grid auto-cols-fr items-center gap-4;
+    }
+    .label {
+        @apply text-sm text-gray-900/50 dark:text-gray-100/50;
+    }
+    .input {
+        @apply px-4 py-2 rounded bg-slate-100 appearance-none outline-none text-sky-700 transition hover:cursor-pointer hover:ring focus:ring dark:bg-neutral-800;
+    }
+    .button {
+        @apply px-6 py-2 rounded text-sky-700 uppercase text-center transition hover:cursor-pointer hover:bg-sky-700/20 active:bg-amber-500/20 active:text-amber-500 disabled:pointer-events-none disabled:text-gray-600/60;
+    }
+}
