@@ -2,18 +2,19 @@ import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
 import { getClientIPAddress } from "remix-utils";
 
+import { getLocation } from "~/utils/getLocation.server";
 import { getForecast } from "~/utils/getForecast.server";
 
 export const loader: LoaderFunction = async ({ request }) => {
-    let ipAddress = getClientIPAddress(request);
-    console.log(ipAddress);
-    const location = await fetch(`http://localhost:3000/v1/location`)
-        .then((resp) => {
-            return resp.json();
+    let ip = getClientIPAddress(request) || "";
+    const location = await getLocation(ip);
+    const forecast = await getForecast(location.lat, location.lon)
+        .then((data) => {
+            return json<Forecast>(data, 200);
         })
         .catch((error) => {
-            return error;
+            return json(error, 400);
         });
 
-    return json<Forecast>(await getForecast(location.lat, location.lon), 200);
+    return forecast;
 };

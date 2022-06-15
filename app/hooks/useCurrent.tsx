@@ -8,9 +8,9 @@ type ComponentProps = {
 const useCurrent = ({ city }: ComponentProps) => {
     const fetcher = useFetcher();
     const [current, setCurrent] = useState<Current>({
-        date: "",
-        city: "",
-        weather: "",
+        date: "-",
+        city: "-",
+        weather: "-",
         temp: 0,
         pressure: 0,
         humidity: 0,
@@ -21,10 +21,13 @@ const useCurrent = ({ city }: ComponentProps) => {
     useEffect(() => {
         if (fetcher.type === "init") {
             setLoading(true);
+            setError("");
             fetcher.load(`/v1/current/${city ? city : ""}`);
         }
         if (fetcher.type === "done") {
-            setCurrent(fetcher.data);
+            fetcher.data.message
+                ? setError(fetcher.data.message)
+                : setCurrent(fetcher.data);
             setLoading(false);
         }
     }, [fetcher, city]);

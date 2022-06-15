@@ -7,27 +7,30 @@ type ComponentProps = {
 
 const useForecast = ({ city }: ComponentProps) => {
     const fetcher = useFetcher();
-    const [forecast, setForecast] = useState<Forecast>([
-        {
-            date: "",
-            weather: "",
+    const [forecast, setForecast] = useState<Forecast>(
+        Array.from({ length: 5 }).map(() => ({
+            date: "-",
+            weather: "-",
             temp_day: 0,
             temp_eve: 0,
             temp_night: 0,
             pressure: 0,
             humidity: 0,
-        },
-    ]);
+        }))
+    );
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
     useEffect(() => {
         if (fetcher.type === "init") {
             setLoading(true);
+            setError("");
             fetcher.load(`/v1/forecast/${city ? city : ""}`);
         }
         if (fetcher.type === "done") {
-            setForecast(fetcher.data);
+            fetcher.data.message
+                ? setError(fetcher.data.message)
+                : setForecast(fetcher.data);
             setLoading(false);
         }
     }, [fetcher, city]);

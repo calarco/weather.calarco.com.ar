@@ -1,10 +1,17 @@
-type Current = {
-    date: string;
+type Location = {
+    country: string;
     city: string;
+    lat: number;
+    lon: number;
+};
+
+type Current = {
+    city: string;
+    date: string;
     weather: string;
     temp: number;
-    pressure: number;
     humidity: number;
+    pressure: number;
 };
 
 type Forecast = {
@@ -13,6 +20,6 @@ type Forecast = {
     temp_day: number;
     temp_eve: number;
     temp_night: number;
-    pressure: number;
     humidity: number;
+    pressure: number;
 }[];

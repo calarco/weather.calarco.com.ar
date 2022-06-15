@@ -4,12 +4,12 @@ type ComponentProps = {
 
 const Current = function ({ data }: ComponentProps) {
     return (
-        <article className="article grid-cols-2 lg:grid-cols-none lg:grid-flow-col">
-            <p className="col-span-2 text-2xl text-sky-700 dark:text-sky-500/80">
+        <article className="px-8 py-4 grid lg:grid-cols-5 auto-cols-fr items-center gap-4">
+            <p className="col-span-3 lg:col-span-5 px-4 text-teal-500 font-bold text-2xl dark:text-amber-500">
                 {data.city}
             </p>
-            <div className="col-span-2 lg:col-span-1 grid font-mono">
-                <label className="text-sky-700/70 dark:text-gray-100/50">
+            <div>
+                <label className="text-sky-700/70 dark:text-sky-400/50">
                     {new Date(data.date)
                         .toLocaleDateString("default", {
                             month: "short",
@@ -18,23 +18,26 @@ const Current = function ({ data }: ComponentProps) {
                         .toUpperCase()}{" "}
                     {data.date.substring(0, 4)}
                 </label>
-                <p className="text-xl text-sky-700">
+                <p className="text-xl font-mono capitalize text-sky-700 dark:text-sky-400/80">
+                    {new Date(data.date).toLocaleDateString("default", {
+                        weekday: "long",
+                    })}{" "}
                     {data.date.substring(8, 10)}
                 </p>
             </div>
-            <div className="grid ">
-                <label className="label">Tiempo</label>
-                <p className="">{data.weather}</p>
+            <div className="col-span-2 lg:col-span-1 ">
+                <label className="label">Pronostico</label>
+                <p className="font-mono">{data.weather}</p>
             </div>
-            <div className="grid ">
+            <div>
                 <label className="label">Temperatura</label>
                 <p className="font-mono">{parseInt(data.temp)}°</p>
             </div>
-            <div className="grid ">
+            <div>
                 <label className="label">Humedad</label>
                 <p className="font-mono">{data.humidity}%</p>
             </div>
-            <div className="grid ">
+            <div>
                 <label className="label">Presion</label>
                 <p className="font-mono">{data.pressure}hPa</p>
             </div>

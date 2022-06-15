@@ -13,6 +13,7 @@ import globalStyles from "~/styles/global.css";
 export const meta: MetaFunction = () => ({
     charset: "utf-8",
     title: "Pronostico",
+    description: "Cunsulte el pronostico por ciudades",
     viewport: "width=device-width,initial-scale=1",
 });
 
@@ -26,12 +27,12 @@ export const links: LinksFunction = () => [
 
 export default function App() {
     return (
-        <html lang="en" className="">
+        <html lang="en">
             <head>
                 <Meta />
                 <Links />
             </head>
-            <body className="h-screen w-screen overflow-clip select-none bg-slate-300 text-gray-900/90 font-sans dark:bg-neutral-900 dark:text-gray-100/80">
+            <body className="h-screen w-screen overflow-clip select-none bg-slate-200 text-gray-900/80 font-sans dark:bg-neutral-900 dark:text-gray-100/70">
                 <Outlet />
                 <ScrollRestoration />
                 <Scripts />

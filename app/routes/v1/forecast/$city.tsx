@@ -5,6 +5,13 @@ import { getForecast } from "~/utils/getForecast.server";
 
 export const loader: LoaderFunction = async ({ params }) => {
     const city = params.city;
+    const forecast = await getForecast(city.split("_")[0], city.split("_")[1])
+        .then((data) => {
+            return json<Forecast>(data, 200);
+        })
+        .catch((error) => {
+            return json(error, 400);
+        });
 
-    return json(await getForecast(city.split("_")[0], city.split("_")[1]), 200);
+    return forecast;
 };

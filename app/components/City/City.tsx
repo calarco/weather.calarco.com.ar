@@ -1,42 +1,85 @@
 import { CSSTransition } from "react-transition-group";
 
-import { Current } from "~/components/Current";
-import { Forecast } from "~/components/Forecast";
+import { Current } from "./Current";
+import { Forecast } from "./Forecast";
 import useCurrent from "~/hooks/useCurrent";
 import useForecast from "~/hooks/useForecast";
 
 type ComponentProps = {
     city?: string;
+    remove?: (e: MouseEvent<HTMLButtonElement>) => void;
     className?: string;
 };
 
-const City = function ({ city, className }: ComponentProps) {
-    const { current, loading: loadingCurrent } = useCurrent({ city });
-    const { forecast, loading: loadingForecast } = useForecast({ city });
+const City = function ({ city, remove, className }: ComponentProps) {
+    const {
+        current,
+        loading: loadingCurrent,
+        error: errorCurrent,
+    } = useCurrent({ city });
+    const {
+        forecast,
+        loading: loadingForecast,
+        error: errorForecast,
+    } = useForecast({ city });
 
     return (
         <section
-            className={`section relative h-[35rem] lg:h-[26rem] ${className}`}
+            className={`relative rounded grid divide-y divide-gray-900/10 dark:divide-gray-100/10 ${
+                city
+                    ? "outline outline-1 outline-gray-900/10 dark:outline-gray-100/10"
+                    : "bg-slate-50 shadow-md dark:bg-gray-800"
+            } ${className}`}
         >
             <Current data={current} />
             <Forecast data={forecast} />
             <CSSTransition
-                in={loadingCurrent || loadingForecast}
+                in={
+                    loadingCurrent ||
+                    loadingForecast ||
+                    errorCurrent ||
+                    errorForecast
+                        ? true
+                        : false
+                }
                 unmountOnExit
                 timeout={{
                     enter: 300,
-                    exit: 150,
+                    exit: 200,
                 }}
                 classNames={{
                     enter: "opacity-0",
                     enterActive:
-                        "opacity-1 duration-300 ease-out transition-all",
+                        "opacity-1 transition-opacity duration-300 ease-out",
                     exit: "opacity-1",
-                    exitActive: "opacity-0 duration-150 ease-in transition-all",
+                    exitActive:
+                        "opacity-0 transition-opacity duration-200 ease-in",
                 }}
             >
-                <div className="absolute inset-0 rounded bg-slate-200 grid items-center dark:bg-neutral-800" />
+                <div className="absolute inset-0 rounded bg-slate-100 grid items-center dark:bg-neutral-800">
+                    {errorCurrent || errorForecast ? (
+                        <p className="grid gap-4 text-red-400/50 dark:text-red-500/70 text-2xl">
+                            <label className="font-mono text-red-400 dark:text-red-500">
+                                error
+                            </label>
+                            {errorCurrent || errorForecast}
+                        </p>
+                    ) : (
+                        <p className="animate-spin text-teal-600 dark:text-amber-500/80 text-3xl">
+                            &#9964;
+                        </p>
+                    )}
+                </div>
             </CSSTransition>
+            {remove && (
+                <button
+                    type="button"
+                    onClick={remove}
+                    className="absolute top-2 right-2 px-5 py-2 rounded border-none text-xl text-red-400 dark:text-red-500 font-mono font-bold transition hover:bg-red-400/20 active:scale-90"
+                >
+                    &#9932;
+                </button>
+            )}
         </section>
     );
 };

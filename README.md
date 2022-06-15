@@ -1,13 +1,13 @@
-# Pronostico
+# Weather
 
-- [Visitar](https://weather.calarco.com.ar)
+-   [Open](https://weather.calarco.com.ar)
 
 ## Development
 
 From your terminal:
 
 ```sh
-npm run dev
+yarn run dev
 ```
 
 ## Deployment
@@ -15,11 +15,19 @@ npm run dev
 First, build your app for production:
 
 ```sh
-npm run build
+yarn run build
 ```
 
 Then run the app in production mode:
 
 ```sh
-npm start
+yarn run start
+```
+
+## Testing
+
+From your terminal:
+
+```sh
+yarn run test
 ```

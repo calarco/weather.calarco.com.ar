@@ -1,11 +1,10 @@
 import type { LoaderFunction } from "@remix-run/node";
 import { json } from "@remix-run/node";
-import { getClientIPAddress } from "remix-utils";
 
 import { getLocation } from "~/utils/getLocation.server";
 
-export const loader: LoaderFunction = async ({ request }) => {
-    const ip = getClientIPAddress(request) || "";
+export const loader: LoaderFunction = async ({ params }) => {
+    const ip = params.ip;
     const location = await getLocation(ip)
         .then((data) => {
             return json<Location>(data, 200);

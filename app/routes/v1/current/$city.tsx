@@ -5,6 +5,13 @@ import { getCurrent } from "~/utils/getCurrent.server";
 
 export const loader: LoaderFunction = async ({ params }) => {
     const city = params.city;
+    const current = await getCurrent(city.split("_")[0], city.split("_")[1])
+        .then((data) => {
+            return json<Current>(data, 200);
+        })
+        .catch((error) => {
+            return json(error, 400);
+        });
 
-    return json(await getCurrent(city.split("_")[0], city.split("_")[1]), 200);
+    return current;
 };
