@@ -6,8 +6,9 @@ type Location = {
 };
 
 type Current = {
-    city: string;
     date: string;
+    city: string;
+    country: string;
     weather: string;
     temp: number;
     humidity: number;
@@ -23,3 +24,7 @@ type Forecast = {
     humidity: number;
     pressure: number;
 }[];
+
+type Error = {
+    message: string;
+};

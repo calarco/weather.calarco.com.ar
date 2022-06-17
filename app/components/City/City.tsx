@@ -58,8 +58,8 @@ const City = function ({ city, remove, className }: ComponentProps) {
             >
                 <div className="absolute inset-0 rounded bg-slate-100 grid items-center dark:bg-neutral-800">
                     {errorCurrent || errorForecast ? (
-                        <p className="grid gap-4 text-red-400/50 dark:text-red-500/70 text-2xl">
-                            <label className="font-mono text-red-400 dark:text-red-500">
+                        <p className="grid gap-4 text-red-500/70 text-2xl">
+                            <label className="font-mono text-red-500 dark:text-red-500">
                                 error
                             </label>
                             {errorCurrent || errorForecast}
@@ -75,7 +75,7 @@ const City = function ({ city, remove, className }: ComponentProps) {
                 <button
                     type="button"
                     onClick={remove}
-                    className="absolute top-2 right-2 px-5 py-2 rounded border-none text-xl text-red-400 dark:text-red-500 font-mono font-bold transition hover:bg-red-400/20 active:scale-90"
+                    className="absolute top-2 right-2 px-5 py-2 rounded border-none text-xl text-red-500 font-mono font-bold transition hover:bg-red-400/20 active:scale-90"
                 >
                     &#9932;
                 </button>

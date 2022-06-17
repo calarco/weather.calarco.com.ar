@@ -6,7 +6,7 @@ const Current = function ({ data }: ComponentProps) {
     return (
         <article className="px-8 py-4 grid lg:grid-cols-5 auto-cols-fr items-center gap-4">
             <p className="col-span-3 lg:col-span-5 px-4 text-teal-500 font-bold text-2xl dark:text-amber-500">
-                {data.city}
+                {data.city} <small className="label pl-2">{data.country}</small>
             </p>
             <div>
                 <label className="text-sky-700/70 dark:text-sky-400/50">

@@ -13,7 +13,7 @@ export const loader: LoaderFunction = async ({ request }) => {
             return json<Current>(data, 200);
         })
         .catch((error) => {
-            return json(error, 400);
+            return json<Error>(error, 400);
         });
 
     return current;

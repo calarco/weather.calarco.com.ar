@@ -13,7 +13,7 @@ import globalStyles from "~/styles/global.css";
 export const meta: MetaFunction = () => ({
     charset: "utf-8",
     title: "Pronostico",
-    description: "Cunsulte el pronostico por ciudades",
+    description: "Consulte el pronostico por ciudades",
     viewport: "width=device-width,initial-scale=1",
 });
 

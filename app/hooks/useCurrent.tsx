@@ -10,6 +10,7 @@ const useCurrent = ({ city }: ComponentProps) => {
     const [current, setCurrent] = useState<Current>({
         date: "-",
         city: "-",
+        country: "-",
         weather: "-",
         temp: 0,
         pressure: 0,
