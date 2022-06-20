@@ -1,9 +1,7 @@
 import { useState } from "react";
+import { useSearchParams } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 import { CSSTransition } from "react-transition-group";
-
-type ComponentProps = {
-    setCities: (cities: string[]) => void;
-};
 
 type InputCities = {
     name: string;
@@ -11,16 +9,18 @@ type InputCities = {
     city: string;
 };
 
-const Search = function ({ setCities }: ComponentProps) {
+const Search = function () {
     const [input, setInput] = useState("");
     const [inputCities, setInputCities] = useState<InputCities>([]);
+    const [searchParams] = useSearchParams();
+    const cities = searchParams.getAll("city");
 
     const handleInputChange = async (event) => {
         setInput(event.target.value);
         if (!event.target.value) return;
 
         const search = await fetch(
-            `http://api.openweathermap.org/geo/1.0/direct?q=${event.target.value}&limit=5&appid=16749c9e1696ec7dcf1cde3c8d8317c7`
+            `https://api.openweathermap.org/geo/1.0/direct?q=${event.target.value}&limit=5&appid=16749c9e1696ec7dcf1cde3c8d8317c7`
         )
             .then((resp) => {
                 return resp.json();
@@ -44,14 +44,13 @@ const Search = function ({ setCities }: ComponentProps) {
             : setInputCities([]);
     };
 
-    const handleAdd = (city: string) => {
-        setCities((cities) => [city, ...cities]);
+    const clear = () => {
         setInput("");
         setInputCities([]);
     };
 
     return (
-        <form className="sticky top-0 z-30 w-full max-w-[30rem] h-[3.5rem] grid">
+        <div className="sticky top-0 z-30 w-full max-w-[30rem] h-[3.5rem] grid">
             <input
                 type="text"
                 name="input"
@@ -77,17 +76,29 @@ const Search = function ({ setCities }: ComponentProps) {
                 }}
             >
                 <div className="absolute top-[3.5rem] left-0 right-0 h-[17.5rem] rounded-b overflow-clip bg-slate-300/70 dark:bg-neutral-800/70 backdrop-blur shadow-lg grid grid-rows-5">
-                    {inputCities.map((city, index) => (
-                        <button
-                            key={index}
-                            type="button"
-                            onClick={() => handleAdd(city.city)}
-                            className="px-6 py-2 hover:bg-teal-400/20 text-left text-teal-600 dark:text-amber-500 lg:text-lg hover:cursor-pointer"
-                        >
-                            {city.name}{" "}
-                            <small className="label">{city.country}</small>
-                        </button>
-                    ))}
+                    {inputCities[0] ? (
+                        inputCities.map((city, index) => (
+                            <Link
+                                key={index}
+                                to={`?city=${city.city}${
+                                    cities[0]
+                                        ? "&city=" + cities.join("&city=")
+                                        : ""
+                                }`}
+                                onClick={() => clear()}
+                                className="px-6 py-2 hover:bg-teal-400/20 flex items-center text-left text-teal-600 dark:text-amber-500 lg:text-lg hover:cursor-pointer"
+                            >
+                                {city.name}{" "}
+                                <small className="label pl-2 font-mono">
+                                    {city.country}
+                                </small>
+                            </Link>
+                        ))
+                    ) : (
+                        <p className="label row-span-5 grid items-center">
+                            Sin resultados
+                        </p>
+                    )}
                 </div>
             </CSSTransition>
             <CSSTransition
@@ -107,13 +118,13 @@ const Search = function ({ setCities }: ComponentProps) {
             >
                 <button
                     type="button"
-                    onClick={() => setInput("")}
-                    className="button absolute right-2 top-2 bottom-2 z-50"
+                    onClick={() => clear()}
+                    className="button absolute right-2 top-2 bottom-2 z-50 pt-0 pb-1"
                 >
-                    Borrar
+                    &#9932;
                 </button>
             </CSSTransition>
-        </form>
+        </div>
     );
 };
 

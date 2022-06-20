@@ -1,24 +1,29 @@
-import { useState } from "react";
+import { useSearchParams } from "@remix-run/react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
 import { City } from "~/components/City";
 import { Search } from "~/components/Search";
 
 function Weather() {
-    const [cities, setCities] = useState([]);
+    const [searchParams] = useSearchParams();
+    const cities = searchParams.getAll("city");
 
     const handleRemove = (city: string) => {
-        var array = [...cities];
-        var index = array.indexOf(city);
-        if (index !== -1) {
-            array.splice(index, 1);
-            setCities(array);
+        if (cities[1]) {
+            const array = [...cities];
+            const index = array.indexOf(city);
+            if (index !== -1) {
+                array.splice(index, 1);
+            }
+            return "?city=" + array.join("&city=");
+        } else {
+            return "/";
         }
     };
 
     return (
         <main className="h-full w-full py-8 px-4 lg:p-8 overflow-auto grid gap-10 lg:gap-8 justify-center justify-items-center content-start text-center">
-            <Search setCities={setCities} />
+            <Search />
             <City />
             <TransitionGroup component={null}>
                 {cities.map((city) => (
@@ -37,7 +42,7 @@ function Weather() {
                                 "opacity-0 scale-95 transition duration-200 ease-in",
                         }}
                     >
-                        <City city={city} remove={() => handleRemove(city)} />
+                        <City city={city} remove={handleRemove(city)} />
                     </CSSTransition>
                 ))}
             </TransitionGroup>

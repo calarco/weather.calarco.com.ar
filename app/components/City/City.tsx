@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react";
 import { CSSTransition } from "react-transition-group";
 
 import { Current } from "./Current";
@@ -7,7 +8,7 @@ import useForecast from "~/hooks/useForecast";
 
 type ComponentProps = {
     city?: string;
-    remove?: (e: MouseEvent<HTMLButtonElement>) => void;
+    remove?: string;
     className?: string;
 };
 
@@ -72,13 +73,9 @@ const City = function ({ city, remove, className }: ComponentProps) {
                 </div>
             </CSSTransition>
             {remove && (
-                <button
-                    type="button"
-                    onClick={remove}
-                    className="absolute top-2 right-2 px-5 py-2 rounded border-none text-xl text-red-500 font-mono font-bold transition hover:bg-red-400/20 active:scale-90"
-                >
+                <Link to={remove} className="button absolute top-4 right-4">
                     &#9932;
-                </button>
+                </Link>
             )}
         </section>
     );

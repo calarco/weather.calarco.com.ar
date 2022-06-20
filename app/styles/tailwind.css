@@ -10,6 +10,6 @@
         @apply px-6 py-2 rounded bg-slate-300/70 hover:bg-teal-400/20 focus:hover:bg-slate-300/70 dark:bg-neutral-800/70 dark:hover:bg-amber-500/10 dark:focus:hover:bg-amber-500/10 backdrop-blur shadow-inner dark:shadow-lg appearance-none outline-none transition lg:text-lg capitalize hover:cursor-pointer focus:ring;
     }
     .button {
-        @apply px-6 py-2 rounded bg-slate-50 hover:bg-teal-400/20 focus:hover:bg-teal-400/20 dark:bg-gray-800 dark:hover:bg-amber-400/10 shadow text-teal-600 dark:text-amber-500 disabled:text-gray-600/60 uppercase text-center transition hover:cursor-pointer active:scale-90 disabled:pointer-events-none;
+        @apply px-4 py-2 rounded hover:bg-red-400/20 border-none text-red-500 disabled:text-gray-600/60 text-xl font-mono font-bold uppercase text-center transition hover:cursor-pointer active:scale-90 disabled:pointer-events-none;
     }
 }
