@@ -2,14 +2,14 @@ type ComponentProps = {
     data: Forecast;
 };
 
-const Forecast = function ({ data }: ComponentProps) {
+function Forecast({ data }: ComponentProps) {
     return (
         <div className="overflow-x-auto grid">
             <div className="min-w-max divide-x divide-gray-900/10 grid grid-cols-5 dark:divide-gray-100/10">
                 {data?.map((day, index) => (
                     <article
                         key={index}
-                        className="w-60 px-8 py-4 grid auto-cols-fr items-center gap-y-4 gap-x-8"
+                        className="w-[16rem] px-6 grid auto-cols-fr items-center content-evenly"
                     >
                         <div className="col-span-6">
                             <label className="capitalize text-sky-700/70 dark:text-sky-400/50">
@@ -25,7 +25,7 @@ const Forecast = function ({ data }: ComponentProps) {
                             </p>
                         </div>
                         <div className="col-span-6">
-                            <label className="label">Pronostico</label>
+                            <label className="label">Pronóstico</label>
                             <p className="font-mono">{day.weather}</p>
                         </div>
                         <div className="col-span-2">
@@ -51,7 +51,7 @@ const Forecast = function ({ data }: ComponentProps) {
                             <p className="font-mono">{day.humidity}%</p>
                         </div>
                         <div className="col-span-3">
-                            <label className="label">Presion</label>
+                            <label className="label">Presión</label>
                             <p className="font-mono">{day.pressure}hPa</p>
                         </div>
                     </article>
@@ -59,6 +59,6 @@ const Forecast = function ({ data }: ComponentProps) {
             </div>
         </div>
     );
-};
+}
 
 export default Forecast;

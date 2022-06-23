@@ -12,8 +12,8 @@ import globalStyles from "~/styles/global.css";
 
 export const meta: MetaFunction = () => ({
     charset: "utf-8",
-    title: "Pronostico",
-    description: "Consulte el pronostico por ciudades",
+    title: "Pronóstico del tiempo",
+    description: "Consulte el pronóstico del tiempo por ciudades",
     viewport: "width=device-width,initial-scale=1",
 });
 

@@ -2,9 +2,9 @@ type ComponentProps = {
     data: Current;
 };
 
-const Current = function ({ data }: ComponentProps) {
+function Current({ data }: ComponentProps) {
     return (
-        <article className="px-8 py-4 grid auto-cols-fr items-center gap-4 lg:grid-cols-5">
+        <article className="grid auto-cols-fr items-center content-evenly lg:grid-cols-5">
             <p className="col-span-3 lg:col-span-5 px-4 text-teal-500 font-bold text-2xl dark:text-amber-500">
                 {data.city}{" "}
                 <small className="label pl-2 font-mono">{data.country}</small>
@@ -28,7 +28,7 @@ const Current = function ({ data }: ComponentProps) {
                 </p>
             </div>
             <div className="col-span-3 lg:col-span-1">
-                <label className="label">Pronostico</label>
+                <label className="label">Pronóstico</label>
                 <p className="font-mono">{data.weather}</p>
             </div>
             <div>
@@ -40,11 +40,11 @@ const Current = function ({ data }: ComponentProps) {
                 <p className="font-mono">{data.humidity}%</p>
             </div>
             <div>
-                <label className="label">Presion</label>
+                <label className="label">Presión</label>
                 <p className="font-mono">{data.pressure}hPa</p>
             </div>
         </article>
     );
-};
+}
 
 export default Current;

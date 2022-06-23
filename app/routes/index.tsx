@@ -22,7 +22,7 @@ function Weather() {
     };
 
     return (
-        <main className="h-full w-full py-8 px-4 lg:p-8 overflow-auto grid gap-10 lg:gap-8 justify-center justify-items-center content-start text-center">
+        <main className="h-full w-full py-10 overflow-auto grid grid-cols-[auto,minmax(auto,80rem),auto] gap-y-10 gap-x-4 lg:gap-x-8 justify-items-center content-start text-center">
             <Search />
             <City />
             <TransitionGroup component={null}>
@@ -34,9 +34,9 @@ function Weather() {
                             exit: 200,
                         }}
                         classNames={{
-                            enter: "opacity-0 -translate-y-4",
+                            enter: "opacity-0 max-h-[0rem]",
                             enterActive:
-                                "opacity-1 transition duration-300 ease-out",
+                                "opacity-1 max-h-[34rem] lg:max-h-[26rem] transition-all duration-300 ease-out",
                             exit: "opacity-1",
                             exitActive:
                                 "opacity-0 scale-95 transition duration-200 ease-in",
