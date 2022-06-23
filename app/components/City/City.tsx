@@ -16,7 +16,7 @@ function City({ city, remove, className }: ComponentProps) {
 
     return (
         <section
-            className={`col-start-2 relative justify-self-stretch h-[34rem] lg:h-[26rem] rounded-xl ${
+            className={`col-start-2 relative justify-self-stretch h-[34rem] lg:h-[26rem] rounded-xl overflow-clip ${
                 city
                     ? "outline outline-1 outline-gray-900/10 dark:outline-gray-100/10"
                     : "bg-slate-50 shadow-md dark:bg-gray-800"
